@@ -80,10 +80,11 @@ body {
   overflow: hidden;
 }
 
-.noSearchResult {
+.no_search_result {
   size : 600px;
   color : #e64a19
 }
+
 
 .footer {
   text-align: center;
