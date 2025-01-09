@@ -32,7 +32,7 @@ const showMovies = (movies) => {
 
   if (movies.length === 0) {
     // 검색과 일치하는 영화가 없으면 메시지 표시
-    moviesList.innerHTML = '<p class="noSearchResult">검색 결과와 일치하는 영화가 없습니다. 다시 시도하세요.</p>';
+    moviesList.innerHTML = '<p class="no_search_result">검색 결과와 일치하는 영화가 없습니다. 다시 시도하세요.</p>';
     return;
 
   } else { // 불러올 수 있는 영화의 데이터가 있으면 카드 덩어리와 그 덩어리 안에 카드 하나하나 제작
