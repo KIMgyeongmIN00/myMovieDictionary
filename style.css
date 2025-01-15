@@ -17,11 +17,6 @@ body {
 .header h1 {
   margin: 0;
   font-size: 2rem;
-}
-
-.header h1 {
-  margin: 0;
-  font-size: 2rem;
   cursor: pointer;
   transition: color 0.3s ease, transform 0.3s ease;
 }
@@ -203,7 +198,7 @@ body {
   z-index: 1000;
 }
 
-.modal-content {
+.modal_content {
   background-color: white;
   padding: 20px;
   border-radius: 10px;
@@ -214,7 +209,7 @@ body {
   overflow-y: auto;
 }
 
-.close-button {
+.close_button {
   position: absolute;
   top: 10px;
   right: 10px;
@@ -222,11 +217,11 @@ body {
   cursor: pointer;
 }
 
-.close-button:hover {
+.close_button:hover {
   color: red;
 }
 
-#modal-poster {
+#modalPoster {
   width: 100%;
   height: 400px;
   object-fit: contain;
@@ -235,36 +230,36 @@ body {
   background-color: #f0f0f0;
 }
 
-#modal-title {
+#modalTitle {
   font-size: 24px;
   margin: 10px 0;
 }
 
-#modal-overview {
+#modalOverview {
   font-size: 16px;
   color: #555;
   line-height: 1.5;
 }
 
-#modal-release-date,
-#modal-rating {
+#modalReleaseDate,
+#modalRating {
   font-size: 14px;
   color: #777;
   margin: 5px 0;
 }
 
 @media (max-width: 768px) {
-  .modal-content {
+  .modal_content {
     width: 90%;
   }
 
-  #modal-poster {
+  #modalPoster {
     height: 300px;
   }
 }
 
 @media (max-width: 480px) {
-  #modal-poster {
+  #modalPoster {
     height: 200px;
   }
 }

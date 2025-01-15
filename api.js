@@ -31,7 +31,7 @@ const bringApi = async (url) => {
 
 // 영화 목록을 화면에 표시
 const displayMovies = (movies) => {
-  const moviesList = document.getElementById('movieslist');
+  const moviesList = document.getElementById('moviesList');
   moviesList.innerHTML = '';
 
   if (movies.length === 0) {
@@ -75,14 +75,14 @@ const displayMovies = (movies) => {
 // 모달창 여는 함수
 const openModal = (movieElement) => {
   const modal = document.getElementById('modal');
-  const modalTitle = document.getElementById('modal-title');
-  const modalPoster = document.getElementById('modal-poster');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalPoster = document.getElementById('modalPoster');
   modalPoster.onerror = () => { // 이미지 로딩 실패 시 기본 이미지 제공
     modalPoster.src = 'https://search.pstatic.net/sunny/?src=https%3A%2F%2Fpng.pngtree.com%2Fpng-vector%2F20220702%2Fourmid%2Fpngtree-loading-icon-template-load-vector-png-image_5675658.png&type=sc960_832'; // 기본 이미지
   };
-  const modalOverview = document.getElementById('modal-overview');
-  const modalReleaseDate = document.getElementById('modal-release-date');
-  const modalRating = document.getElementById('modal-rating');
+  const modalOverview = document.getElementById('modalOverview');
+  const modalReleaseDate = document.getElementById('modalReleaseDate');
+  const modalRating = document.getElementById('modalRating');
 
   // 모달창에 영화 정보 채우기
   modalTitle.textContent = movieElement.dataset.movieTitle;
@@ -102,7 +102,7 @@ const closeModal = () => {
 };
 
 // 모달창 닫기 버튼 이벤트리스너
-document.querySelector('.close-button').addEventListener('click', closeModal);
+document.querySelector('.close_button').addEventListener('click', closeModal);
 
 // 배경 클릭 시 모달창 닫기
 window.addEventListener('click', (event) => {
@@ -127,7 +127,7 @@ document.getElementById('searchButton').addEventListener('click', () => {
   if (keyword) {
     searchMovies(keyword);
   } else {
-    alert("검색어를 입력해주세요!")
+    alert("검색어를 입력해주세요!");
   }
 });
 
@@ -138,13 +138,13 @@ document.getElementById('searchInput').addEventListener('keypress', (e) => {
     if (keyword) {
       searchMovies(keyword);
     } else {
-      alert("검색어를 입력해주세요!")
+      alert("검색어를 입력해주세요!");
     }
   }
 });
 
 // 영화 카드 클릭 이벤트 위임 처리
-document.getElementById('movieslist').addEventListener('click', (event) => {
+document.getElementById('moviesList').addEventListener('click', (event) => {
   const movieElement = event.target.closest('.movie');
   if (movieElement) {
     openModal(movieElement);
