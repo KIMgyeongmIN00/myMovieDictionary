@@ -1,7 +1,12 @@
-const baseURL = 'https://api.themoviedb.org/3';  // TMDB 홈페이지 URL
-const popularMoviesURL = `${baseURL}/movie/popular?language=ko-KR`;  // TMDB API 
+// 영화 검색 클릭 시 페이지 새로고침
+document.getElementById('clickToRefresh').addEventListener('click', () => {
+  location.reload();
+});
 
-// TMDB API 요청 옵션
+const baseURL = 'https://api.themoviedb.org/3';  // TMDB 홈페이지 URL
+const popularMoviesURL = `${baseURL}/movie/popular?language=ko-KR`;  // TMDB API 접근 URL
+
+// TMDB API 요청 옵션과 요청 키 암호화
 const options = {
   method: 'GET',
   headers: {
@@ -18,8 +23,7 @@ const bringApi = async (url) => {
       throw new Error(`fetch 요청중 에러가 발생 하였습니다. 에러 이유 - ${response.status}`);
     }
     const data = await response.json();
-    const movies = data.results; 
-    displayMovies(movies); // 영화 목록 표시 함수 호출
+    displayMovies(data.results); // 영화 목록 표시 함수 호출
   } catch (error) {
     console.error('영화를 불러오는데 에러가 발생 하였습니다. 에러 상태 - ', error);
   }
@@ -40,6 +44,13 @@ const displayMovies = (movies) => {
   movies.forEach(movie => {
     const movieElement = document.createElement('section');
     movieElement.classList.add('movie');
+    movieElement.dataset.movieId = movie.id;
+    movieElement.dataset.movieTitle = movie.title;
+    movieElement.dataset.moviePoster = movie.poster_path;
+    movieElement.dataset.movieOverview = movie.overview;
+    movieElement.dataset.movieReleaseDate = movie.release_date;
+    movieElement.dataset.movieRating = movie.vote_average;
+    movieElement.dataset.movieVoteCount = movie.vote_count;
 
     const image = document.createElement('img');
     image.src = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
@@ -58,16 +69,11 @@ const displayMovies = (movies) => {
 
     movieElement.appendChild(movieInfo);
     moviesList.appendChild(movieElement);
-
-    // 영화 카드 클릭 시 모달창 열기
-    movieElement.addEventListener('click', () => {
-      openModal(movie);
-    });
   });
 };
 
-// 모달창 열기
-const openModal = (movie) => {
+// 모달창 여는 함수
+const openModal = (movieElement) => {
   const modal = document.getElementById('modal');
   const modalTitle = document.getElementById('modal-title');
   const modalPoster = document.getElementById('modal-poster');
@@ -79,11 +85,11 @@ const openModal = (movie) => {
   const modalRating = document.getElementById('modal-rating');
 
   // 모달창에 영화 정보 채우기
-  modalTitle.textContent = movie.title;
-  modalPoster.src = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
-  modalOverview.textContent = movie.overview;
-  modalReleaseDate.textContent = `개봉일: ${movie.release_date}`;
-  modalRating.textContent = `평점: ${movie.vote_average} (${movie.vote_count}명)`;
+  modalTitle.textContent = movieElement.dataset.movieTitle;
+  modalPoster.src = `https://image.tmdb.org/t/p/w500${movieElement.dataset.moviePoster}`;
+  modalOverview.textContent = movieElement.dataset.movieOverview;
+  modalReleaseDate.textContent = `개봉일: ${movieElement.dataset.movieReleaseDate}`;
+  modalRating.textContent = `평점: ${movieElement.dataset.movieRating} (${movieElement.dataset.movieVoteCount}명)`;
 
   // 모달창 표시
   modal.style.display = 'flex';
@@ -115,20 +121,32 @@ const searchMovies = async (query) => {
 // 웹페이지 로딩 시 인기 영화 불러오기
 bringApi(popularMoviesURL);
 
-// 키워드 입력 후 버튼 누를 시 검색 이벤트 활성화
+// 검색어 입력 후 검색 버튼 눌러 검색
 document.getElementById('searchButton').addEventListener('click', () => {
   const keyword = document.getElementById('searchInput').value.trim();
   if (keyword) {
     searchMovies(keyword);
+  } else {
+    alert("검색어를 입력해주세요!")
   }
 });
 
-// 키워드 입력 후 엔터키 입력 시 검색 이벤트 활성화
+// 검색어 입력 후 엔터키 눌러 검색
 document.getElementById('searchInput').addEventListener('keypress', (e) => {
   if (e.key === 'Enter') {
     const keyword = document.getElementById('searchInput').value.trim();
     if (keyword) {
       searchMovies(keyword);
+    } else {
+      alert("검색어를 입력해주세요!")
     }
+  }
+});
+
+// 영화 카드 클릭 이벤트 위임 처리
+document.getElementById('movieslist').addEventListener('click', (event) => {
+  const movieElement = event.target.closest('.movie');
+  if (movieElement) {
+    openModal(movieElement);
   }
 });
