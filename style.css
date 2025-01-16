@@ -1,3 +1,13 @@
+:root {
+  --base-color: white;
+  --text-color: black;
+}
+
+.darkmode {
+  --base-color: rgb(37, 37, 37);
+  --text-color: rgb(255, 255, 255);
+}
+
 body {
   margin: 0;
   font-family: Arial, sans-serif;
@@ -5,10 +15,13 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  color: var(--text-color);
+  background-color: var(--base-color);
 }
 
+/* 헤더 */
 .header {
-  background-color: #2b2b2b;
+  background-color: black;
   color: white;
   text-align: center;
   padding: 20px;
@@ -57,6 +70,7 @@ body {
   background-color: #e64a19;
 }
 
+/* 영화카드 */
 .movies_list {
   display: flex;
   flex-wrap: wrap;
@@ -68,10 +82,11 @@ body {
 }
 
 .movie {
-  background-color: white;
+  position: relative;
+  background-color: var(--base-color);
   width: 200px;
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 10px var(--text-color);
   overflow: hidden;
   flex-shrink: 0;
 }
@@ -99,15 +114,17 @@ body {
   overflow: hidden;
 }
 
+/* 검색결과 없음 */
 .no_search_result {
   size: 600px;
   color: #e64a19;
 }
 
+/* 푸터 */
 .footer {
   text-align: center;
   padding: 20px;
-  background-color: #2b2b2b;
+  background-color: #000000;
   color: white;
   margin-top: auto;
   display: flex;
@@ -135,6 +152,7 @@ body {
   gap: 8px;
 }
 
+/* 기본 구성 HTML 반응형 */
 @media (max-width: 768px) {
   .header h1 {
     font-size: 1.5rem;
@@ -185,6 +203,7 @@ body {
   }
 }
 
+/* 모달창 */
 .modal {
   display: none;
   position: fixed;
@@ -199,14 +218,18 @@ body {
 }
 
 .modal_content {
-  background-color: white;
+  position: relative;
+  background-color: var(--base-color);
   padding: 20px;
   border-radius: 10px;
-  width: 80%;
+  width: 90%;
   max-width: 500px;
-  position: relative;
   max-height: 90vh;
   overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
 }
 
 .close_button {
@@ -215,6 +238,9 @@ body {
   right: 10px;
   font-size: 24px;
   cursor: pointer;
+  background-color: transparent;
+  border: none;
+  color: #333;
 }
 
 .close_button:hover {
@@ -223,43 +249,144 @@ body {
 
 #modalPoster {
   width: 100%;
-  height: 400px;
+  max-height: 400px;
   object-fit: contain;
   border-radius: 10px;
-  margin-bottom: 15px;
-  background-color: #f0f0f0;
+  background-color: var(--base-color);
 }
 
 #modalTitle {
   font-size: 24px;
-  margin: 10px 0;
+  margin: 0;
+  text-align: center;
+  color: var(--text-color);
 }
 
 #modalOverview {
   font-size: 16px;
-  color: #555;
+  color: var(--text-color);
   line-height: 1.5;
+  text-align: center;
 }
 
 #modalReleaseDate,
 #modalRating {
   font-size: 14px;
-  color: #777;
+  color: var(--text-color);
   margin: 5px 0;
+  text-align: center;
 }
 
 @media (max-width: 768px) {
   .modal_content {
     width: 90%;
+    padding: 15px;
   }
 
   #modalPoster {
-    height: 300px;
+    max-height: 300px;
+  }
+
+  #modalTitle {
+    font-size: 20px;
+  }
+
+  #modalOverview {
+    font-size: 14px;
+  }
+
+  #modalReleaseDate,
+  #modalRating {
+    font-size: 12px;
   }
 }
 
 @media (max-width: 480px) {
-  #modalPoster {
-    height: 200px;
+  .modal_content {
+    width: 95%;
+    padding: 10px;
   }
+
+  #modalPoster {
+    max-height: 200px;
+  }
+
+  #modalTitle {
+    font-size: 18px;
+  }
+
+  #modalOverview {
+    font-size: 12px;
+  }
+
+  #modalReleaseDate,
+  #modalRating {
+    font-size: 10px;
+  }
+}
+
+/* 북마크 */
+.bookmark_button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: #ff5722;
+  color: white;
+  border: none;
+  border-radius: 25%;
+  width: 45px;
+  height: 30px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  transition: background-color 0.3s ease;
+}
+
+.bookmark_button:hover {
+  background-color: #e64a19;
+}
+
+.bookmark_button.bookmarked {
+  background-color: #4caf50;
+}
+
+.bookmark_link,
+.home_link {
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.bookmark_link:hover,
+.home_link:hover {
+  background-color: #45a049;
+}
+
+.remove_bookmark_button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: #ff5722;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.remove_bookmark_button:hover {
+  background-color: #e64a19;
 }
