@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TMDB 영화 검색</title>
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+
+<body class="">
   <header class="header">
     <h1 id="clickToRefresh">영화 검색</h1>
     <div class="search_container">
+      <a href="bookmark.html" class="bookmark_link">북마크 보기</a>
       <input type="text" id="searchInput" placeholder="영화 제목을 검색하세요...">
       <button id="searchButton">검색</button>
     </div>
@@ -32,11 +35,14 @@
 
   <footer class="footer">
     <p>이 사이트는 <a href="https://www.themoviedb.org/" target="_blank" rel="noopener noreferrer">
-      <img src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_square_2-d537fb228cf3ded904ef09b136fe3fec72548ebc1fea3fbbd1ad9e36364db38b.svg" alt="TMDB Logo">
-    </a>를 활용하여<br> 제작되었습니다.</p>
+        <img
+          src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_square_2-d537fb228cf3ded904ef09b136fe3fec72548ebc1fea3fbbd1ad9e36364db38b.svg"
+          alt="TMDB Logo">
+      </a>를 활용하여<br> 제작되었습니다.</p>
     <p>제작자 : 김경민</p>
   </footer>
 
-  <script src="api.js"></script>
+  <script type="module" src="js/main.js"></script>
 </body>
+
 </html>
