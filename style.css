@@ -1,11 +1,13 @@
 :root {
   --base-color: white;
   --text-color: black;
+  --base-variant: rgb(173, 173, 173);
 }
 
 .darkmode {
   --base-color: rgb(37, 37, 37);
   --text-color: rgb(255, 255, 255);
+  --base-variant: rgb(75, 75, 75);
 }
 
 body {
@@ -389,4 +391,34 @@ body {
 
 .remove_bookmark_button:hover {
   background-color: #e64a19;
+}
+
+#themeSwitch {
+  height: 50px;
+  width: 50px;
+  padding: 0;
+  border-radius: 50%;
+  background-color: var(--base-variant);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+}
+
+#themeSwitch svg {
+  fill: var(--text-color);
+}
+
+#themeSwitch svg:last-child {
+  display: none;
+}
+
+.darkmode #themeSwitch svg:first-child {
+  display: none;
+}
+
+.darkmode #themeSwitch svg:last-child {
+  display: block;
 }
