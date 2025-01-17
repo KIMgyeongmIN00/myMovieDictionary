@@ -1,7 +1,9 @@
 import { bringApi, getMovieDetailsURL } from './api.js';
 import { getBookmarks, removeBookmark } from './bookmark.js';
 import { openModal, setupModalListeners } from './modal.js';
+import { darkmode, enableDarkmode } from './darkmode.js';
 
+// 북마크된 영화 표시하기
 export const displayBookmarkedMovies = async () => {
   const bookmarkedMoviesList = document.getElementById('bookmarkedMoviesList');
   bookmarkedMoviesList.innerHTML = '';
@@ -72,7 +74,7 @@ export const displayBookmarkedMovies = async () => {
       movieElement.appendChild(removeBookmarkButton);
       bookmarkedMoviesList.appendChild(movieElement);
     } catch (error) {
-      console.error('영화 정보를 불러오는 중 오류가 발생했습니다:', error);
+      console.error('영화를 불러오는데 에러가 발생 하였습니다. 에러 상태 - ', error);
     }
   }
 
@@ -90,3 +92,5 @@ document.addEventListener('DOMContentLoaded', () => {
   displayBookmarkedMovies();
   setupModalListeners(); // 모달 이벤트 리스너 설정
 });
+
+if (darkmode === 'active') enableDarkmode();

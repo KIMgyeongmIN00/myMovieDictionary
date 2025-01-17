@@ -2,6 +2,7 @@ import { bringApi, getPopularMoviesURL } from './api.js';
 import { displayMovies } from './ui.js';
 import { setupSearchListeners } from './search.js';
 import { setupModalListeners } from './modal.js';
+import { setupDarkmodeListener } from './darkmode.js';
 
 // 페이지 로드 시 실행
 document.addEventListener('DOMContentLoaded', async () => {
@@ -16,6 +17,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // 모달 이벤트 리스너 설정
   setupModalListeners();
+
+  // 다크모드 이벤트 리스너 설정
+  setupDarkmodeListener();
 });
 
 // 페이지 새로고침
